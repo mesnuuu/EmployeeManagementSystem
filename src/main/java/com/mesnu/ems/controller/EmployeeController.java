@@ -23,7 +23,7 @@ public class EmployeeController {
 	// add mapping for "/list"
 
 	@GetMapping("/list")
-	public String listEmployees(Model theModel) {
+	public String listEmployees(Model theModel) { 
 
 		// get employees from db 
 	
@@ -32,6 +32,18 @@ public class EmployeeController {
 		// add to the spring model 
 		theModel.addAttribute("employees", theEmployees);
 
-		return "list-employees";
+		return "/employees/list-employees";
 	}
+	
+	@GetMapping("/showFormForAdd")
+	public String showFormForAdd(Model theModel) {
+		
+		// create model attribute to bind form data
+		Employee theEmployee = new Employee();
+		
+		theModel.addAttribute("employee", theEmployee);
+		
+		return "/employees/employee-form";
+	}
+	
 }
