@@ -19,11 +19,30 @@
 	<h3>Employee Directory</h3>
 	<hr>
 	
+	<form action="" class="form-inline">
+	
 		<!-- Add a button -->
-	<a th:href="@{/employees/showFormForAdd}"
-		class="btn btn-primary btn-sm mb-3">
-		Add Employee
-	</a>
+		
+		<a th:href="@{/employees/showFormForAdd}"
+			class="btn btn-primary btn-sm mb-3">
+			Add Employee
+		</a>
+	
+	<!-- Search Functionality  -->
+	
+		<input type="search" placeholder="Search by Name" 
+			   class="form-control  ml-5 mr-sm-2 mb-3"
+		 />
+	
+		<button class="btn btn-success mb-3" type="submit" > Search </button>	
+	
+	
+	</form>
+
+	
+	
+	<!-- ------------------------------------------------ -->
+	
 	
 	<table class="table table-bordered table-striped">
 		<thead class="thead-dark">
@@ -44,7 +63,9 @@
 				
 
 					<!-- UPDATE EMPLOYEE - Step 1 : Update button -->
-					<!--      (employeeId=${tempEmployee.id})           -->					
+					
+					<!--      (employeeId=${tempEmployee.id})           -->		
+								
 					 <!--     Append to URL --    ?employeeId=xxx       -->
 
 				<td><a th:href="@{/employees/showFormForUpdate(employeeId=${tempEmployee.id})}"
@@ -62,6 +83,19 @@
 			</tr>
 		</tbody>		
 	</table>
+	
+	
+			<!-- Add a logout button - must use POST -->
+			
+			<!-- Logout URL will be handled by Spring Security Filters --> 
+			
+			<!-- no Coding Required  -->
+			
+	<form action="" >
+	
+		<input type="submit" value="Logout" class="btn btn-outline-primary mt-2"/>
+		
+	</form>
 	
 </div>
 	
