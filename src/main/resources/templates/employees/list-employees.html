@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <!-- Required meta tags -->
@@ -18,6 +19,15 @@
 
 	<h3>Employee Directory</h3>
 	<hr>
+	
+	     <!-- Display user name and role in Thymeleaf  -->
+    
+		<div>	
+			User: 		<span sec:authentication="name"></span> <br>	
+			Role(s): 	<span sec:authentication="principal.authorities"></span> 
+			<br><br>
+		</div>
+	
 	
 	<form action="" class="form-inline">
 	
@@ -50,7 +60,7 @@
 				<th>First Name</th>
 				<th>Last Name</th>
 				<th>Email</th>
-				<th>Action</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		
