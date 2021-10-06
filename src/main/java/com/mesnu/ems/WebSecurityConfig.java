@@ -22,7 +22,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/employees/save*").hasAnyRole("MANAGER", "ADMIN")
 			.antMatchers("/employees/delete").hasRole("ADMIN")
 			.antMatchers("/employees/**").hasRole("EMPLOYEE")
-			.antMatchers("/resources/**").permitAll()
+		    .antMatchers("/resources/**").permitAll() 
+				/* .anyRequest().authenticated() */
 			.and()
 			.formLogin()
 				.loginPage("/customLogin")
@@ -31,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.logout().permitAll()
 			.and()
-			.exceptionHandling().accessDeniedPage("/access-denied");
+			.exceptionHandling().accessDeniedPage("/access-denied");  //  <- custom access denied page configuration 
 		
 	}
 

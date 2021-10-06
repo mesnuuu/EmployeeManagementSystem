@@ -12,6 +12,7 @@ public class MvcConfig implements WebMvcConfigurer {
 
 
 	  registry.addViewController("/customLogin").setViewName("my-login");
+	  registry.addViewController("/access-denied").setViewName("access-denied");
 	  
 	  }
 	 
