@@ -29,7 +29,7 @@
 		</div>
 	
 	
-	<form action="" class="form-inline">
+	<form th:action="@{/employees/search}" class="form-inline">
 	
 		<!-- Add a button -->
 		
@@ -40,7 +40,7 @@
 	
 	<!-- Search Functionality  -->
 	
-		<input type="search" placeholder="Search by Name" 
+		<input type="search" placeholder="Search by Name" name="employeeName"
 			   class="form-control  ml-5 mr-sm-2 mb-3"
 		 />
 	

@@ -113,5 +113,21 @@ public class EmployeeController implements WebMvcConfigurer {
 		// use a redirect to prevent duplicate submissions
 		return "redirect:/employees/list";
 	}
+	
+	@GetMapping("/search")
+	public String delete(@RequestParam("employeeName") String theName,
+						 Model theModel) {
+		
+		// delete the employee
+		List<Employee> theEmployees = employeeService.searchBy(theName);
+		
+		
+		// add to the spring model
+		theModel.addAttribute("employees", theEmployees);
+		
+		// send to /employees/list
+		return "/employees/list-employees";
+		
+	}
 
 }
