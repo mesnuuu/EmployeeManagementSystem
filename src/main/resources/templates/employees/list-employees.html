@@ -17,7 +17,8 @@
 
 <div class="container">
 
-	<h3>Employee Directory</h3>
+	<h3><a th:href="@{/employees/list}">Employees Directory</a></h3>
+	
 	<hr>
 	
 	     <!-- Display user name and role in Thymeleaf  -->
@@ -41,7 +42,7 @@
 	<!-- Search Functionality  -->
 	
 		<input type="search" placeholder="Search by Name" name="employeeName"
-			   class="form-control  ml-5 mr-sm-2 mb-3"
+			   class="form-control  ml-5 mr-sm-2 mb-3" required=true
 		 />
 	
 		<button class="btn btn-success mb-3" type="submit" > Search </button>	

@@ -118,7 +118,7 @@ public class EmployeeController implements WebMvcConfigurer {
 	public String delete(@RequestParam("employeeName") String theName,
 						 Model theModel) {
 		
-		// delete the employee
+		// search  the employee by 
 		List<Employee> theEmployees = employeeService.searchBy(theName);
 		
 		
