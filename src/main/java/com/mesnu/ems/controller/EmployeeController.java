@@ -30,16 +30,16 @@ public class EmployeeController implements WebMvcConfigurer {
 	public EmployeeController(EmployeeService theEmployeeService) {
 		employeeService = theEmployeeService;
 	}
-	
+
 	// add an initbinder ... to convert trim input strings
 	// remove leading and trailing whitespace
 	// resolve issue for our validation
-	
+
 	@InitBinder
 	public void initBinder(WebDataBinder dataBinder) {
-		
+
 		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
-		
+
 		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
 	}
 
@@ -55,7 +55,7 @@ public class EmployeeController implements WebMvcConfigurer {
 		// add to the spring model
 		theModel.addAttribute("employees", theEmployees);
 
-		return "/employees/list-employees";
+		return "employees/list-employees";
 	}
 
 	@GetMapping("/showFormForAdd")
@@ -66,68 +66,62 @@ public class EmployeeController implements WebMvcConfigurer {
 
 		theModel.addAttribute("employee", theEmployee);
 
-		return "/employees/employee-form";
+		return "employees/employee-form";
 	}
-	
-	// UPDATE EMPLOYEE - 
+
+	// UPDATE EMPLOYEE -
 	// Step 2 : Add controller code to pre-populate form
-	
+
 	@GetMapping("/showFormForUpdate")
-	public String showFormForUpdate(@RequestParam("employeeId") int theId,
-									Model theModel) {
-		
+	public String showFormForUpdate(@RequestParam("employeeId") int theId, Model theModel) {
+
 		// get the employee from the service
 		Employee theEmployee = employeeService.findById(theId);
-		
+
 		// set employee as a model attribute to pre-populate the form
 		theModel.addAttribute("employee", theEmployee);
-		
+
 		// send over to our form
-		return "employees/employee-form";			
+		return "employees/employee-form";
 	}
-	
+
 	@GetMapping("/delete")
 	public String delete(@RequestParam("employeeId") int theId) {
-		
+
 		// delete the employee
 		employeeService.deleteById(theId);
-		
+
 		// redirect to /employees/list
 		return "redirect:/employees/list";
-		
+
 	}
 
-	
-
 	@PostMapping("/save")
-	public String saveEmployee(@Valid @ModelAttribute("employee") Employee theEmployee,
-			BindingResult bindingResult) {
+	public String saveEmployee(@Valid @ModelAttribute("employee") Employee theEmployee, BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
 			return "employees/employee-form";
 		}
-		
+
 		// save the employee
 		employeeService.save(theEmployee);
 
 		// use a redirect to prevent duplicate submissions
 		return "redirect:/employees/list";
 	}
-	
+
 	@GetMapping("/search")
-	public String delete(@RequestParam("employeeName") String theName,
-						 Model theModel) {
-		
-		// search  the employee by 
+	public String delete(@RequestParam("employeeName") String theName, Model theModel) {
+
+		// search the employee by
 		List<Employee> theEmployees = employeeService.searchBy(theName);
-		
-		
+
 		// add to the spring model
 		theModel.addAttribute("employees", theEmployees);
-		
+
 		// send to /employees/list
-		return "/employees/list-employees";
-		
+		return "employees/list-employees";
+
 	}
 
 }

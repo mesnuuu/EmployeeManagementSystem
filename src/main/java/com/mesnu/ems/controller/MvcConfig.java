@@ -10,43 +10,39 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.mesnu.ems.consumeRest.Quote;
+import com.mesnu.ems.rest.Quote;
 
 @Configuration
 @Controller
 public class MvcConfig implements WebMvcConfigurer {
 
-	
-	  public void addViewControllers(ViewControllerRegistry registry) {
-		  
-	//  registry.addViewController("/customLogin").setViewName("my-login");
-	  registry.addViewController("/access-denied").setViewName("access-denied");
-	  
-	  }
-	  
-		@Bean
-		public RestTemplate restTemplate() {
-			return new RestTemplate();
-		}
+	public void addViewControllers(ViewControllerRegistry registry) {
 
-		@Autowired
-		RestTemplate restTemplate;
-		
-		@GetMapping("/customLogin")
-		public String home(Model model) {
+		// registry.addViewController("/customLogin").setViewName("my-login");
+		registry.addViewController("/access-denied").setViewName("access-denied");
 
-			
-			  Quote quote = restTemplate.getForObject(
-			  "https://quoters.apps.pcfone.io/api/random", Quote.class);
-			  
-			  String quoteString = quote.getValue().getQuote();
-			  
-			  model.addAttribute("quote", quoteString) ;
-			 
+	}
 
-			return "my-login";
+	@Bean
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
 
-		}
-	 
+	@Autowired
+	RestTemplate restTemplate;
+
+	@GetMapping("/customLogin")
+	public String home(Model model) {
+
+		Quote quote = restTemplate.getForObject("https://quoters.apps.pcfone.io/api/random", Quote.class);
+
+		String quoteString = quote.getValue().getQuote();
+
+		model.addAttribute("quote", quoteString);
+		model.addAttribute("theDate", new java.util.Date());
+
+		return "my-login";
+
+	}
 
 }
