@@ -28,6 +28,7 @@ public class Employee {
 
 	@NotNull(message = "* last name required")
 	@Size(min = 2, message = "minimum 5 characters")
+	@Column(name="last_name")
 	private String lastName;
 
 	// @NotNull( message = " is required")
